@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            /* Dark gradient background */
+            background: linear-gradient(120deg, #1a1a1a, #2b2b2b 40%, #333333 60%, #000000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        label {
+            color: #bbbbbb;
+            font-size: 1.2rem;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        input {
+            border: 1px solid #555555;
+            border-radius: 25px;
+            padding: 10px 15px;
+            width: 300px;
+            font-size: 1rem;
+            margin-top: 10px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #999999;
+            font-style: italic;
+        }
+
+        input:focus {
+            border: 1px solid #888888;
+            box-shadow: 0px 0px 10px #444444;
+        }
+
+        button {
+            background-color: #444444;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background-color: #555555;
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        button:active {
+            background-color: #333333;
+            transform: translateY(1px);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>YouTube Video Downloader</h1>
+    <form action="/download" method="POST">
+        <label for="url">Enter YouTube Video URL:</label><br>
+        <input type="text" id="url" name="url" placeholder="https://www.youtube.com/watch?v=..." required><br><br>
+        <button type="submit">Download</button>
+    </form>
+</body>
+
+</html>
