@@ -15,12 +15,20 @@ def download_video():
         video_url = request.form['url']
 
         # Options for yt_dlp to stream directly
-        ydl_opts = {
-            'format': 'best',  # Choose the best video and audio quality
-            'noplaylist': True,  # Don't download playlists if the URL is for a playlist
-            'outtmpl': 'downloads/%(id)s.%(ext)s',  # Temporary location
-            'cookiefile': 'cookies.txt'  # Path to your cookies file
+          ydl_opts = {
+            'format': 'best',
+            'noplaylist': True,
+            'outtmpl': 'downloads/%(id)s.%(ext)s',
+            'cookiefile': '-'  # Use "-" to read cookies from stdin
         }
+        
+        # Pass cookies from the environment variable
+        cookies_content = os.getenv('YOUTUBE_COOKIES')
+        if cookies_content:
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w+', delete=False) as cookies_file:
+                cookies_file.write(cookies_content)
+                ydl_opts['cookiefile'] = cookies_file.name
 
 
         with YoutubeDL(ydl_opts) as ydl:
