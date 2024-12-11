@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, Response
 from yt_dlp import YoutubeDL
+import os
 import urllib.parse
+import tempfile
 
 app = Flask(__name__)
 
@@ -15,21 +17,20 @@ def download_video():
         video_url = request.form['url']
 
         # Options for yt_dlp to stream directly
-          ydl_opts = {
-            'format': 'best',
-            'noplaylist': True,
-            'outtmpl': 'downloads/%(id)s.%(ext)s',
-            'cookiefile': '-'  # Use "-" to read cookies from stdin
+        ydl_opts = {
+            'format': 'best',  # Choose the best video and audio quality
+            'noplaylist': True,  # Don't download playlists if the URL is for a playlist
+            'outtmpl': 'downloads/%(id)s.%(ext)s',  # Temporary location (can be omitted)
+            'cookiefile': None  # Default, if no cookie is provided
         }
-        
-        # Pass cookies from the environment variable
+
+        # Pass cookies from the environment variable (if available)
         cookies_content = os.getenv('YOUTUBE_COOKIES')
         if cookies_content:
-            import tempfile
+            # Create a temporary file for cookies
             with tempfile.NamedTemporaryFile(mode='w+', delete=False) as cookies_file:
                 cookies_file.write(cookies_content)
                 ydl_opts['cookiefile'] = cookies_file.name
-
 
         with YoutubeDL(ydl_opts) as ydl:
             # Extract video information without downloading to the server
