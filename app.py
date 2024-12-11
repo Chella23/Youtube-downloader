@@ -20,6 +20,7 @@ def download_video():
             'noplaylist': True,  # Don't download playlists if the URL is for a playlist
             'quiet': True,  # Suppress output for cleaner logs
             'outtmpl': 'downloads/%(id)s.%(ext)s'  # Temporary location (can be omitted)
+            'cookiefile': 'cookies.txt', 
         }
 
         with YoutubeDL(ydl_opts) as ydl:
