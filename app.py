@@ -18,10 +18,10 @@ def download_video():
         ydl_opts = {
             'format': 'best',  # Choose the best video and audio quality
             'noplaylist': True,  # Don't download playlists if the URL is for a playlist
-            
-            'outtmpl': 'downloads/%(id)s.%(ext)s'  # Temporary location (can be omitted)
-            
+            'outtmpl': 'downloads/%(id)s.%(ext)s',  # Temporary location
+            'cookiefile': 'cookies.txt'  # Path to your cookies file
         }
+
 
         with YoutubeDL(ydl_opts) as ydl:
             # Extract video information without downloading to the server
